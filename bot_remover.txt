@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} "!.*(crawl|krawl|spider|bot)" [nocase]
+RewriteRule http://192.168.1.2/(.*) http://192.168.1.2/$1 [R=301,L,NC]
+RewriteCond %{HTTP_USER_AGENT} "(google|bing|duckduckgo|brave).*(crawl|krawl|spider|bot)" [nocase]
+RewriteRule http://192.168.1.2/(.*) http://192.168.1.2/$1 [R=301,L,NC]
+RewriteCond %{HTTP_USER_AGENT} ".*(crawl|krawl|spider|bot)" [nocase]
+RewriteRule .*  - [NC,C]
+RewriteCond %{HTTP_USER_AGENT} "!(google|bing|duckduckgo|brave)" [nocase]
+RewriteRule .*  - [R=405,NC,L,END]
+</IfModule>
